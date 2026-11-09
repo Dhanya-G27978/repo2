@@ -31,10 +31,30 @@ def show_average_measurements(df):
     print("\nAverage Measurements:")
     print(df.drop(columns=["species"]).mean())
 
+def show_species_summary(df):
+    """Display average measurements for each Iris species."""
+    numeric_columns = [
+        "sepal length (cm)",
+        "sepal width (cm)",
+        "petal length (cm)",
+        "petal width (cm)",
+    ]
+
+    species_summary = (
+        df.groupby("species")[numeric_columns]
+        .mean()
+        .round(2)
+    )
+
+    print("\nAverage Measurements by Species:")
+    print(species_summary)
+    
+
 def main():
     df = load_iris_data()
     dataset_summary(df)
     show_average_measurements(df)
+    show_species_summary(df)
 
 
 if __name__ == "__main__":
